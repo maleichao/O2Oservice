@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tykj.member.mapper.MemberMapper">
+   <resultMap type="com.tykj.member.model.Member" id="memberResultMap">
+        <id property="memberId" column="memberId"/>
+        <result property="memberName" column="memberName"/>
+        <result property="memberPassword" column="memberPassword"/>
+        <result property="memberType" column="memberType"/>
+        <result property="memberAuditStatus" column="memberAuditStatus"/>
+        <result property="token" column="token"/>
+        <result property="registerDate" column="registerDate"/>
+   </resultMap>
+   <!-- 查找所用 -->
+   <select id="getMemberAll"  resultType="com.tykj.member.model.Member">
+        select * from tykj_member
+   </select>
+   <!-- 查找对象集合 -->
+   <select id="getMemberByParam"  resultType="com.tykj.member.model.Member">
+        select * from tykj_member 
+        where 1=1
+        <if test="memberName!=null and memberName!=''">memberName=#{memberName}</if>
+        order by memberId desc
+        limit ${start},${end}
+   </select>
+   <insert id="saveMember" parameterType="com.tykj.member.model.Member" useGeneratedKeys="true" keyProperty="memberId"  > 
+   insert into 
+   tykj_member (memberName,memberPassword,memberType,memberAuditStatus,token,registerDate)
+   values(#{memberName},#{memberPassword},#{memberType},#{memberAuditStatus},#{token},#{registerDate})
+   </insert>
+</mapper>  
+

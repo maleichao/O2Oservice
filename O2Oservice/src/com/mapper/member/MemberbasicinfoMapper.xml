@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tykj.member.mapper.MemberbasicinfoMapper">
+  <resultMap id="BaseResultMap" type="com.tykj.member.model.Memberbasicinfo">
+    <id column="memberBasicInfoId" jdbcType="INTEGER" property="memberBasicInfoId" />
+    <result column="memberId" jdbcType="INTEGER" property="memberId" />
+    <result column="memberRealName" jdbcType="VARCHAR" property="memberRealName" />
+    <result column="memberSex" jdbcType="TINYINT" property="memberSex" />
+    <result column="portraitUrl" jdbcType="VARCHAR" property="portraitUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    memberBasicInfoId, memberId, memberRealName, memberSex, portraitUrl
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tykj_memberbasicinfo
+    where memberBasicInfoId = #{memberBasicInfoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tykj_memberbasicinfo
+    where memberBasicInfoId = #{memberBasicInfoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tykj.member.model.Memberbasicinfo">
+    insert into tykj_memberbasicinfo (memberBasicInfoId, memberId, memberRealName, 
+      memberSex, portraitUrl)
+    values (#{memberBasicInfoId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{memberRealName,jdbcType=VARCHAR}, 
+      #{memberSex,jdbcType=TINYINT}, #{portraitUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tykj.member.model.Memberbasicinfo">
+    insert into tykj_memberbasicinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberBasicInfoId != null">
+        memberBasicInfoId,
+      </if>
+      <if test="memberId != null">
+        memberId,
+      </if>
+      <if test="memberRealName != null">
+        memberRealName,
+      </if>
+      <if test="memberSex != null">
+        memberSex,
+      </if>
+      <if test="portraitUrl != null">
+        portraitUrl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberBasicInfoId != null">
+        #{memberBasicInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberRealName != null">
+        #{memberRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberSex != null">
+        #{memberSex,jdbcType=TINYINT},
+      </if>
+      <if test="portraitUrl != null">
+        #{portraitUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tykj.member.model.Memberbasicinfo">
+    update tykj_memberbasicinfo
+    <set>
+      <if test="memberId != null">
+        memberId = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberRealName != null">
+        memberRealName = #{memberRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberSex != null">
+        memberSex = #{memberSex,jdbcType=TINYINT},
+      </if>
+      <if test="portraitUrl != null">
+        portraitUrl = #{portraitUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where memberBasicInfoId = #{memberBasicInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tykj.member.model.Memberbasicinfo">
+    update tykj_memberbasicinfo
+    set memberId = #{memberId,jdbcType=INTEGER},
+      memberRealName = #{memberRealName,jdbcType=VARCHAR},
+      memberSex = #{memberSex,jdbcType=TINYINT},
+      portraitUrl = #{portraitUrl,jdbcType=VARCHAR}
+    where memberBasicInfoId = #{memberBasicInfoId,jdbcType=INTEGER}
+  </update>
+</mapper>
